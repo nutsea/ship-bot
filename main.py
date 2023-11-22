@@ -7,8 +7,8 @@ import utils
 
 db_params = {
     'dbname': 'ship',
-    'user': 'nastya',
-    'password': 'Nutseassqlcode12!',
+    'user': 'root',
+    'password': 'root',
     'host': 'localhost',
     'port': '5432'
 }

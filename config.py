@@ -1,4 +1,4 @@
 host = "localhost"
-user = "postgres"
-password = "Nutseassqlcode12!"
+user = "shipper"
+password = "ship"
 db_name = "ship"

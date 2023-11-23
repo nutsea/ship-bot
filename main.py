@@ -7,8 +7,8 @@ import utils
 
 db_params = {
     'dbname': 'ship',
-    'user': 'root',
-    'password': 'root',
+    'user': 'shipper',
+    'password': 'ship',
     'host': 'localhost',
     'port': '5432'
 }

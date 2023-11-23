@@ -9,7 +9,7 @@ db_params = {
     'dbname': 'ship',
     'user': 'shipper',
     'password': 'ship',
-    'host': 'localhost',
+    'host': '194.58.98.156',
     'port': '5432'
 }
 

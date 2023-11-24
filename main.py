@@ -5,16 +5,6 @@ from config import host, user, password, db_name
 import time
 import utils
 
-db_params = {
-    'dbname': 'ship',
-    'user': 'shipper',
-    'password': 'ship',
-    'host': '194.58.98.156',
-    'port': '5432'
-}
-
-time = '2023-11-21 22:46:42.152+03'
-
 admin = 5359516739
 variable = utils.Variable()
 bot = telebot.TeleBot("6530283151:AAGIjz4ckeRUTa9znRu1aSVrlrDVEn2ZkDc")
@@ -41,13 +31,12 @@ def admmmmin(message):
 def print_all_commands(call): 
   if call.data == "curs":
     
-    # connection = psycopg2.connect(
-    #     host=host,
-    #     user=user,
-    #     password=password,
-    #     database=db_name
-    # )
-    connection = psycopg2.connect(**db_params)
+    connection = psycopg2.connect(
+        host=host,
+        user=user,
+        password=password,
+        database=db_name    
+    )
     connection.autocommit = True
 
     # #     connection.commit()
@@ -171,13 +160,10 @@ def handle_text(message):
             kb_change_trak.add(k3)
             bot.send_message(message.chat.id, "УЖЕ СУЩЕСТВУЕТ\nВведите новый трек номер и его статус через пробел\n\nПример (AE14713894 1)\n\n1. Выкуплен, в пути склад\n2. Принят на складе, оформляется\n3. Заказ в пути\n4. Сортируется в Москве be\n5. Передан в СДЭК\n6. Получен клиентом",reply_markup=kb_change_trak)
       except:
-        try:
-          with connection.cursor() as cursor:
-              cursor.execute(
-                  f"""INSERT INTO orders (track,status,createdAt, updatedAt) VALUES ('{trak}',{status},TIMESTAMP '{time}',TIMESTAMP '{time}')"""
-              )
-        except Exception as e:
-          print(f"Произошла ошибка: {e}")
+        with connection.cursor() as cursor:
+            cursor.execute(
+              f"""INSERT INTO orders (track,status) VALUES ('{trak}',{status})"""
+            )
 
 
 
@@ -213,6 +199,7 @@ def handle_text(message):
         )
         
         a = cursor.fetchone()
+        print(a)
         kb_change_trak = types.InlineKeyboardMarkup(row_width=1)
         k3 = types.InlineKeyboardButton(text="НАЗАД",callback_data="back") 
         kb_change_trak.add(k3)
